@@ -14,29 +14,40 @@ import modelo.CadVO;
 import persistencia.ConexaoBanco;
 
 public class CadDAO {
-        public void cadastrar(CadVO fVO)throws SQLException{
+    public void cadastrar(CadVO fVO) throws SQLException {
         Connection con = ConexaoBanco.getConexao();
         Statement stat = con.createStatement();
-        
-        try{
-            String sql;
-               sql = "insert into cadastro(id , nome , datanasc , cpf , cidade , estado, email, senha)"
-                    + "values (null, '" + fVO.getNome() + "', '"
-                                       + fVO.getDatanasc() + "' , '"
-                                       + fVO.getCpf() + "' , '"
-                                       + fVO.getCidade() + "' , '"
-                                       + fVO.getEstado() + "' , '"
-                                       + fVO.getEmail()+ "' , '"
-                                       + fVO.getSenha() +"') ";
-          stat.execute(sql);
-            
-        }catch (SQLException e){
-            throw new SQLException("Erro ao cadastrar usuario!");
-        }finally{
+
+        try {
+            // Verifica se o CPF já está cadastrado no banco
+            String cpfExistQuery = "SELECT id FROM cadastro WHERE cpf = '" + fVO.getCpf() + "'";
+            ResultSet cpfExistResult = stat.executeQuery(cpfExistQuery);
+
+            if (cpfExistResult.next()) {
+                throw new SQLException("CPF já cadastrado");
+            }
+
+            // Caso o CPF não esteja cadastrado, realiza o cadastro normalmente
+            String sql = "INSERT INTO cadastro (id, nome, datanasc, cpf, cidade, estado, email, senha) "
+                    + "VALUES (null, '" + fVO.getNome() + "', '"
+                    + fVO.getDatanasc() + "', '"
+                    + fVO.getCpf() + "', '"
+                    + fVO.getCidade() + "', '"
+                    + fVO.getEstado() + "', '"
+                    + fVO.getEmail() + "', '"
+                    + fVO.getSenha() + "')";
+
+            stat.execute(sql);
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao cadastrar usuário: " + e.getMessage());
+        } finally {
             con.close();
             stat.close();
         }
     }
+
+    // ... outros métodos da classe ...
       public ArrayList<CadVO> buscar() throws SQLException {
         Connection con = ConexaoBanco.getConexao();
         Statement stat = con.createStatement();

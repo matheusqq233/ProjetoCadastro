@@ -345,7 +345,7 @@ private boolean isValidDate(String dateStr) {
     }
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
             if (!jtfEmail.getText().contains("@") || (!jtfEmail.getText().endsWith("@hotmail.com") && !jtfEmail.getText().endsWith("@gmail.com"))) {
-            JOptionPane.showMessageDialog(rootPane, "E-mail inválido. Verifique o formato do e-mail.");
+            JOptionPane.showMessageDialog(rootPane, "E-mail inválido. Verifique o formato do e-mail");
             return; // Não prosseguir com o cadastro
         }else if(jtfNome.getText().equals("")){
            JOptionPane.showMessageDialog(
@@ -368,7 +368,7 @@ private boolean isValidDate(String dateStr) {
                     "O campo senha é obrigatório");
            return;
         }else if(!isValidDate(jtfDataNasc.getText())) {
-        JOptionPane.showMessageDialog(rootPane, "Data de nascimento inválida. Verifique o formato e os valores dos dias e meses.");
+        JOptionPane.showMessageDialog(rootPane, "Data de nascimento inválida. Verifique o formato e os valores dos dias e meses");
         return; // Não prosseguir com o cadastro
     }
         cadastrar();
