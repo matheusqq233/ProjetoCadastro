@@ -1,6 +1,9 @@
 package view;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -246,7 +249,56 @@ public class GUICad extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private boolean isValidDate(String dateStr) {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    sdf.setLenient(false); // Define que a data não será interpretada de forma flexível
+    
+    try {
+        // Transforma a string em um objeto do tipo Calendar
+        Calendar date = Calendar.getInstance();
+        date.setTime(sdf.parse(dateStr));
+        
+        // Obtém os valores dos campos de data
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH) + 1; // Os meses em Calendar são indexados a partir de 0
+        int day = date.get(Calendar.DAY_OF_MONTH);
+        
+        // Obtém o ano, mês e dia atual
+        Calendar currentDate = Calendar.getInstance();
+        int currentYear = currentDate.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH) + 1;
+        int currentDay = currentDate.get(Calendar.DAY_OF_MONTH);
+        
+        // Verifica se o ano é futuro
+        if (year > currentYear) {
+            return false;
+        }
+        
+        // Verifica se o mês é válido (entre 1 e 12)
+        if (month < 1 || month > 12) {
+            return false;
+        }
+        
+        // Verifica se o dia é válido (entre 1 e 31)
+        if (day < 1 || day > 31) {
+            return false;
+        }
+        
+        // Verifica se o ano é igual ao ano atual e se o mês é futuro
+        if (year == currentYear && month > currentMonth) {
+            return false;
+        }
+        
+        // Verifica se o ano e o mês são iguais ao ano e mês atual e se o dia é futuro
+        if (year == currentYear && month == currentMonth && day > currentDay) {
+            return false;
+        }
+        
+        return true;
+    } catch (ParseException e) {
+        return false; // Caso ocorra um erro de parsing, a data é inválida
+    }
+}
      
         private void cadastrar(){
             
@@ -268,7 +320,7 @@ public class GUICad extends javax.swing.JInternalFrame {
             cs.cadastrar(cVO);
             
                     // Chamar o método setUsuarioCadastrado da classe GUILogin
-        GUILogin guiLogin = new GUILogin();
+        GUIManu guiLogin = new GUIManu();
         guiLogin.setUsuarioCadastrado(jtfEmail.getText(), jpfSenha.getText());
 
             JOptionPane.showMessageDialog(
@@ -315,7 +367,10 @@ public class GUICad extends javax.swing.JInternalFrame {
                     rootPane,
                     "O campo senha é obrigatório");
            return;
-        }
+        }else if(!isValidDate(jtfDataNasc.getText())) {
+        JOptionPane.showMessageDialog(rootPane, "Data de nascimento inválida. Verifique o formato e os valores dos dias e meses.");
+        return; // Não prosseguir com o cadastro
+    }
         cadastrar();
         cancelar();
             // Fechar a janela de cadastro

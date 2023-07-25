@@ -16,7 +16,7 @@ import javax.swing.event.InternalFrameListener;
 public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameListener{
     
     private boolean flagGuiCad = false;
-    private boolean flagGuiLogin = false;
+    private boolean flagGuiManu = false;
     
     public MenuPrincipal() {
         initComponents();
@@ -33,7 +33,8 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
 
         jdpAreaDeTrabalho = new javax.swing.JDesktopPane();
         jbCadastro = new javax.swing.JButton();
-        jbLogin = new javax.swing.JButton();
+        jbManu = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,40 +50,50 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
             }
         });
 
-        jbLogin.setText("Login");
-        jbLogin.addActionListener(new java.awt.event.ActionListener() {
+        jbManu.setText("Manu");
+        jbManu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLoginActionPerformed(evt);
+                jbManuActionPerformed(evt);
             }
         });
-        jbLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+        jbManu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jbLoginKeyPressed(evt);
+                jbManuKeyPressed(evt);
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\182210104\\Downloads\\emoji-joinha-cancelado.jpeg")); // NOI18N
+
         jdpAreaDeTrabalho.setLayer(jbCadastro, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdpAreaDeTrabalho.setLayer(jbLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpAreaDeTrabalho.setLayer(jbManu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpAreaDeTrabalho.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdpAreaDeTrabalhoLayout = new javax.swing.GroupLayout(jdpAreaDeTrabalho);
         jdpAreaDeTrabalho.setLayout(jdpAreaDeTrabalhoLayout);
         jdpAreaDeTrabalhoLayout.setHorizontalGroup(
             jdpAreaDeTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdpAreaDeTrabalhoLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jbCadastro)
-                .addGap(31, 31, 31)
-                .addComponent(jbLogin)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addGroup(jdpAreaDeTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jdpAreaDeTrabalhoLayout.createSequentialGroup()
+                        .addGap(454, 454, 454)
+                        .addComponent(jbCadastro)
+                        .addGap(62, 62, 62)
+                        .addComponent(jbManu))
+                    .addGroup(jdpAreaDeTrabalhoLayout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(jLabel1)))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
         jdpAreaDeTrabalhoLayout.setVerticalGroup(
             jdpAreaDeTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpAreaDeTrabalhoLayout.createSequentialGroup()
-                .addContainerGap(280, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(90, 90, 90)
                 .addGroup(jdpAreaDeTrabalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCadastro)
-                    .addComponent(jbLogin))
-                .addGap(233, 233, 233))
+                    .addComponent(jbManu))
+                .addGap(463, 463, 463))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,9 +120,9 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
             gc.setVisible(true);
         }
     }
-          private void abrirLogin(){
+          private void abrirManu(){
         if(!flagGuiCad){
-            GUILogin gl = new GUILogin();
+            GUIManu gl = new GUIManu();
             jdpAreaDeTrabalho.add(gl);
             gl.setVisible(true);
         }
@@ -126,15 +137,15 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
          }
     }//GEN-LAST:event_jbCadastroKeyPressed
 
-    private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
-        abrirLogin();
-    }//GEN-LAST:event_jbLoginActionPerformed
+    private void jbManuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbManuActionPerformed
+        abrirManu();
+    }//GEN-LAST:event_jbManuActionPerformed
 
-    private void jbLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbLoginKeyPressed
+    private void jbManuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbManuKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-             abrirLogin();
+             abrirManu();
          }
-    }//GEN-LAST:event_jbLoginKeyPressed
+    }//GEN-LAST:event_jbManuKeyPressed
 
     /**
      * @param args the command line arguments
@@ -172,8 +183,9 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCadastro;
-    private javax.swing.JButton jbLogin;
+    private javax.swing.JButton jbManu;
     private javax.swing.JDesktopPane jdpAreaDeTrabalho;
     // End of variables declaration//GEN-END:variables
 
@@ -191,8 +203,8 @@ public class MenuPrincipal extends javax.swing.JFrame implements InternalFrameLi
     public void internalFrameClosed(InternalFrameEvent ife) {
         if(ife.getInternalFrame() instanceof GUICad){
              flagGuiCad = false;
-         }else if(ife.getInternalFrame() instanceof GUILogin){
-             flagGuiLogin = false;
+         }else if(ife.getInternalFrame() instanceof GUIManu){
+             flagGuiManu = false;
          }
     }
 
