@@ -31,11 +31,9 @@ public class GUICad extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jpfSenha = new javax.swing.JPasswordField();
-        jtfNome = new javax.swing.JTextField();
         jcbEstado = new javax.swing.JComboBox<>();
         jbCadastrar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
         jtfDataNasc = new javax.swing.JFormattedTextField();
         jtfEmail = new javax.swing.JTextField();
         jtfCidade = new javax.swing.JFormattedTextField();
@@ -48,6 +46,19 @@ public class GUICad extends javax.swing.JInternalFrame {
             ex.printStackTrace();
             // Ou qualquer outra ação que você queira tomar em caso de erro
         };
+        btn = new javax.swing.JToggleButton();
+        jtfNome = new javax.swing.JFormattedTextField();
+        ((AbstractDocument) jtfNome.getDocument()).setDocumentFilter(new DocumentFilter() {
+            public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {
+                // Filtra a inserção de texto permitindo letras, espaços e acentos
+                fb.insertString(offset, text.replaceAll("[^\\p{L}\\s]", ""), attr);
+            }
+
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                // Filtra a substituição de texto permitindo letras, espaços e acentos
+                fb.replace(offset, length, text.replaceAll("[^\\p{L}\\s]", ""), attrs);
+            }
+        });
 
         setClosable(true);
         setIconifiable(true);
@@ -71,12 +82,6 @@ public class GUICad extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Senha:");
 
-        jtfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNomeActionPerformed(evt);
-            }
-        });
-
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO", "DF" }));
 
         jbCadastrar.setText("Cadastrar");
@@ -92,8 +97,6 @@ public class GUICad extends javax.swing.JInternalFrame {
                 jbCancelarActionPerformed(evt);
             }
         });
-
-        jRadioButton1.setText("Mostrar Senha");
 
         try {
             javax.swing.text.MaskFormatter dataFormatter = new javax.swing.text.MaskFormatter("##/##/####");
@@ -116,6 +119,13 @@ public class GUICad extends javax.swing.JInternalFrame {
             }
         });
 
+        btn.setText("Mostrar Senha");
+        btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
+
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -124,15 +134,15 @@ public class GUICad extends javax.swing.JInternalFrame {
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jpfSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jtfNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jcbEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jbCadastrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jbCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jRadioButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jtfDataNasc, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jtfEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jtfCidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jtfCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jtfNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -153,7 +163,7 @@ public class GUICad extends javax.swing.JInternalFrame {
                                 .addComponent(jtfDataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtfNome))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
@@ -174,8 +184,8 @@ public class GUICad extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jRadioButton1))))
+                                .addGap(26, 26, 26)
+                                .addComponent(btn))))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jbCadastrar)
@@ -213,8 +223,8 @@ public class GUICad extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jRadioButton1)))
-                .addGap(42, 42, 42)
+                        .addComponent(btn)))
+                .addGap(41, 41, 41)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCadastrar)
                     .addComponent(jbCancelar))
@@ -257,7 +267,10 @@ public class GUICad extends javax.swing.JInternalFrame {
             CadServicos cs = servicos.ServicosFactory.getCadServicos();
             cs.cadastrar(cVO);
             
-            
+                    // Chamar o método setUsuarioCadastrado da classe GUILogin
+        GUILogin guiLogin = new GUILogin();
+        guiLogin.setUsuarioCadastrado(jtfEmail.getText(), jpfSenha.getText());
+
             JOptionPane.showMessageDialog(
                     rootPane,
                     "Cadastrado com sucesso");
@@ -282,6 +295,26 @@ public class GUICad extends javax.swing.JInternalFrame {
             if (!jtfEmail.getText().contains("@") || (!jtfEmail.getText().endsWith("@hotmail.com") && !jtfEmail.getText().endsWith("@gmail.com"))) {
             JOptionPane.showMessageDialog(rootPane, "E-mail inválido. Verifique o formato do e-mail.");
             return; // Não prosseguir com o cadastro
+        }else if(jtfNome.getText().equals("")){
+           JOptionPane.showMessageDialog(
+                    rootPane,
+                    "O Campo nome e obrigatório");
+           return;
+        }else if(jtfCPF.getText().equals("___.___.___-__")){
+           JOptionPane.showMessageDialog(
+                    rootPane,
+                    "O campo CPF é obrigatório");
+           return;
+        }else if(jtfCidade.getText().equals("")){
+           JOptionPane.showMessageDialog(
+                    rootPane,
+                    "O campo cidade é obrigatório");
+           return;
+        }else if(jpfSenha.getText().equals("")){
+           JOptionPane.showMessageDialog(
+                    rootPane,
+                    "O campo senha é obrigatório");
+           return;
         }
         cadastrar();
         cancelar();
@@ -294,12 +327,19 @@ public class GUICad extends javax.swing.JInternalFrame {
         cancelar();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
-    private void jtfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomeActionPerformed
+    private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+          if (btn.isSelected()) {
+            // Mostrar a senha
+            jpfSenha.setEchoChar((char) 0);
+        } else {
+            // Esconder a senha (usando o caractere de senha padrão '*')
+            jpfSenha.setEchoChar('\u2022'); // Caractere de senha padrão (pode variar dependendo do sistema)
+        }
+    }//GEN-LAST:event_btnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -308,7 +348,6 @@ public class GUICad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JButton jbCadastrar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JComboBox<String> jcbEstado;
@@ -317,7 +356,7 @@ public class GUICad extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jtfCidade;
     private javax.swing.JFormattedTextField jtfDataNasc;
     private javax.swing.JTextField jtfEmail;
-    private javax.swing.JTextField jtfNome;
+    private javax.swing.JFormattedTextField jtfNome;
     // End of variables declaration//GEN-END:variables
 }
 

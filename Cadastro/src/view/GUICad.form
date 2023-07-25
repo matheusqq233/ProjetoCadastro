@@ -66,7 +66,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jtfNome" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -87,15 +87,15 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jcbEstado" min="-2" pref="68" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="btn" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -145,10 +145,10 @@
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jpfSenha" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -195,11 +195,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jpfSenha">
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfNome">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNomeActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcbEstado">
           <Properties>
@@ -255,11 +250,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Mostrar Senha"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JFormattedTextField" name="jtfDataNasc">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField()"/>
@@ -277,6 +267,19 @@
         <Component class="javax.swing.JFormattedTextField" name="jtfCPF">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField();&#xa;try {&#xa;    javax.swing.text.MaskFormatter cpfFormatter = new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;);&#xa;    cpfFormatter.setPlaceholderCharacter(&apos;_&apos;); // Define o caractere de espa&#xe7;o reservado&#xa;    jtfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(cpfFormatter));&#xa;} catch (java.text.ParseException ex) {&#xa;    ex.printStackTrace();&#xa;    // Ou qualquer outra a&#xe7;&#xe3;o que voc&#xea; queira tomar em caso de erro&#xa;}"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="btn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mostrar Senha"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jtfNome">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField();&#xa;((AbstractDocument) jtfNome.getDocument()).setDocumentFilter(new DocumentFilter() {&#xa;    public void insertString(FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {&#xa;        // Filtra a inser&#xe7;&#xe3;o de texto permitindo letras, espa&#xe7;os e acentos&#xa;        fb.insertString(offset, text.replaceAll(&quot;[^\\p{L}\\s]&quot;, &quot;&quot;), attr);&#xa;    }&#xa;&#xa;    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {&#xa;        // Filtra a substitui&#xe7;&#xe3;o de texto permitindo letras, espa&#xe7;os e acentos&#xa;        fb.replace(offset, length, text.replaceAll(&quot;[^\\p{L}\\s]&quot;, &quot;&quot;), attrs);&#xa;    }&#xa;})"/>
           </AuxValues>
         </Component>
       </SubComponents>

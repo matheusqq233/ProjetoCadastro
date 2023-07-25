@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 182210104
@@ -30,9 +32,17 @@ public class GUILogin extends javax.swing.JInternalFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jtfCPF = new javax.swing.JTextField();
-        jpfSenha = new javax.swing.JPasswordField();
         jbtnLogin = new javax.swing.JButton();
+        jtfCPF = new javax.swing.JFormattedTextField();
+        try {
+            javax.swing.text.MaskFormatter cpfFormatter = new javax.swing.text.MaskFormatter("###.###.###-##");
+            cpfFormatter.setPlaceholderCharacter('_'); // Define o caractere de espaço reservado
+            jtfCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(cpfFormatter));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+            // Ou qualquer outra ação que você queira tomar em caso de erro
+        };
+        jpfSenha = new javax.swing.JPasswordField();
 
         setClosable(true);
         setIconifiable(true);
@@ -53,9 +63,9 @@ public class GUILogin extends javax.swing.JInternalFrame {
 
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jbtnLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jtfCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jpfSenha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jbtnLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -65,19 +75,19 @@ public class GUILogin extends javax.swing.JInternalFrame {
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtfCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
                             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jpfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfCPF))))
+                                .addComponent(jpfSenha))))
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(jbtnLogin)))
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addGap(259, 259, 259))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +118,13 @@ public class GUILogin extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void setUsuarioCadastrado(String CPF, String senha) {
+        jtfCPF.setText(CPF);
+        jpfSenha.setText(senha);
+    }
+    
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jbtnLoginActionPerformed
 
 
@@ -120,6 +134,6 @@ public class GUILogin extends javax.swing.JInternalFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JButton jbtnLogin;
     private javax.swing.JPasswordField jpfSenha;
-    private javax.swing.JTextField jtfCPF;
+    private javax.swing.JFormattedTextField jtfCPF;
     // End of variables declaration//GEN-END:variables
 }

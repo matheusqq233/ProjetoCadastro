@@ -20,8 +20,8 @@ public class CadDAO {
             String sql;
                sql = "insert into cadastro(id , nome , datanasc , cpf , cidade , estado, email, senha)"
                     + "values (null, '" + fVO.getNome() + "', '"
-                                       + fVO.getDatanasc() + "' , "
-                                       + fVO.getCpf() + " , '"
+                                       + fVO.getDatanasc() + "' , '"
+                                       + fVO.getCpf() + "' , '"
                                        + fVO.getCidade() + "' , '"
                                        + fVO.getEstado() + "' , '"
                                        + fVO.getEmail()+ "' , '"
